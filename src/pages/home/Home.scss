@@ -1,23 +1,59 @@
-.home-container{
+@import "../../globalVariables.scss";
+
+// funcitons
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-container {
+  height: 100vh;
   max-width: 1000px;
+  @include flexCenter();
   margin: auto;
-  .home-wrapper{
+  .home-wrapper {
+    border-radius: 10px;
+    height: 70%;
     margin-top: 2rem;
-    h1{
+    @include flexCenter();
+    flex-direction: column;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    h1 {
       text-align: center;
-      font-size: 4rem;
+      font-size: 5rem;
+      color: $secondary-color;
     }
-    p{
-      letter-spacing: .12rem;
-      font-size: 1.7rem;
-      margin: 2rem 0;
-    }
-    .btn-wrapper{
+    p {
       text-align: center;
+      letter-spacing: 0.12rem;
+      font-size: 1.8rem;
+      margin: 3rem 0;
+    }
+    .btn-wrapper {
+      text-align: center;
+      button {
+        padding: 1em 1.6em;
+        border: none;
+        background-color: $primary-color;
+        color: $text-color;
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      :active {
+        transform: scale(0.91);
+      }
     }
   }
 }
 
-@media screen  {
-  
+@media screen and (max-width: 768px) {
+  .home-wrapper {
+    p {
+      padding: 0 1rem;
+    }
+  }
 }

@@ -15,6 +15,7 @@ export default function Home() {
         <div className="btn-wrapper">
           <button onClick={() => navigate("/quiz")}>Take Quiz</button>
         </div>
+        <button onClick={() => navigate("/result")}>Result</button>
       </div>
     </main>
   );
