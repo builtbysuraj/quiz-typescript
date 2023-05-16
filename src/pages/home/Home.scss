@@ -1,0 +1,23 @@
+.home-container{
+  max-width: 1000px;
+  margin: auto;
+  .home-wrapper{
+    margin-top: 2rem;
+    h1{
+      text-align: center;
+      font-size: 4rem;
+    }
+    p{
+      letter-spacing: .12rem;
+      font-size: 1.7rem;
+      margin: 2rem 0;
+    }
+    .btn-wrapper{
+      text-align: center;
+    }
+  }
+}
+
+@media screen  {
+  
+}
