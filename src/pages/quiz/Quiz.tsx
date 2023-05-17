@@ -1,43 +1,28 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Quiz.scss";
+import Question from "../../components/Question";
+import QuizHeader from "../../components/QuizHeader";
+import data from "../../data/questions.json";
 
 export default function Quiz() {
-  const navigate = useNavigate();
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const Data = data.questions;
+  const currentQuestion = Data[currentQuestionIndex];
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < Data.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
   return (
     <main className="quiz-container">
       <div className="quiz-wrapper">
-        <div className="top">
-          <p className="total-questions">Question 1/4</p>
-          <p className="question-title">
-            What will be answer of this question?
-          </p>
-          <div className="timer">0.54</div>
-        </div>
-        <div className="bottom">
-          <div>
-            <div className="question">8 / 2(2+2)</div>
-          </div>
-          <div className="options">
-            <ul>
-              <li>
-                <span>A</span> first
-              </li>
-              <li>
-                <span>B</span> second
-              </li>
-              <li className="active">
-                <span>C</span> third
-              </li>
-              <li>
-                <span>D</span> fourth
-              </li>
-            </ul>
-          </div>
-          <div className="btn-wrapper">
-            <button disabled>Next</button>
-          </div>
-          <button onClick={() => navigate("/result")}>Result</button>
-        </div>
+        <QuizHeader />
+        <Question
+          question={currentQuestion}
+          handleNextQuestion={handleNextQuestion}
+        />
       </div>
     </main>
   );
