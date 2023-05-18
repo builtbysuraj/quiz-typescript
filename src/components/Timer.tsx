@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-export default function Timer() {
-  const [timer, setTimer] = useState<number>(30);
+type Props = {
+  timer: number;
+  setTimer: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function Timer({ timer, setTimer }: Props) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => (prev > 0 ? prev - 1 : prev));

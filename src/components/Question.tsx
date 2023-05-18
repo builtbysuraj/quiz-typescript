@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type OptionData = {
@@ -16,30 +17,55 @@ type QuestionData = {
 type Props = {
   question: QuestionData;
   handleNextQuestion: () => void;
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Question({ handleNextQuestion, question }: Props) {
+export default function Question({
+  handleNextQuestion,
+  question,
+  score,
+  setScore,
+}: Props) {
   const navigate = useNavigate();
-  const { id, text, options } = question;
+  const { text, options } = question;
+  const [activeOption, setActiveOption] = useState<number | null>(null);
+
+  // Option click function
+  const handleOptionClick = (option: OptionData) => {
+    setActiveOption(option.id);
+    if (option.isCorrect) setScore((prev) => prev + 1);
+  };
+
+  // "Next" button click
+  const handleNext = () => {
+    setActiveOption(null);
+    handleNextQuestion();
+  };
+
+  // console.log(score);
   return (
     <div className="bottom">
       <div>
         <div className="question">{text}</div>
       </div>
       <div className="options">
-        {options?.map((e) => {
+        {options?.map((option) => {
           return (
-            <ul key={e.id}>
-              <li>
-                <span>{e.label}</span>
-                {e.text}
+            <ul key={option.id}>
+              <li
+                onClick={() => handleOptionClick(option)}
+                className={activeOption === option.id ? "active" : ""}
+              >
+                <span>{option.label}</span>
+                {option.text}
               </li>
             </ul>
           );
         })}
       </div>
       <div className="btn-wrapper">
-        <button onClick={handleNextQuestion}>Next</button>
+        <button disabled={activeOption === null} onClick={handleNext}>Next</button>
       </div>
       <button onClick={() => navigate("/result")}>Result</button>
     </div>
