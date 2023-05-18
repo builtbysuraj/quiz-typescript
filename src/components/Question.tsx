@@ -16,20 +16,23 @@ type QuestionData = {
 
 type Props = {
   question: QuestionData;
-  handleNextQuestion: () => void;
   score: number;
   setScore: React.Dispatch<React.SetStateAction<number>>;
+  activeOption: number | null;
+  setActiveOption: React.Dispatch<React.SetStateAction<number | null>>;
+  handleNext: () => void;
 };
 
 export default function Question({
-  handleNextQuestion,
   question,
   score,
   setScore,
+  activeOption,
+  setActiveOption,
+  handleNext,
 }: Props) {
   const navigate = useNavigate();
   const { text, options } = question;
-  const [activeOption, setActiveOption] = useState<number | null>(null);
 
   // Option click function
   const handleOptionClick = (option: OptionData) => {
@@ -37,13 +40,6 @@ export default function Question({
     if (option.isCorrect) setScore((prev) => prev + 1);
   };
 
-  // "Next" button click
-  const handleNext = () => {
-    setActiveOption(null);
-    handleNextQuestion();
-  };
-
-  // console.log(score);
   return (
     <div className="bottom">
       <div>
@@ -65,7 +61,9 @@ export default function Question({
         })}
       </div>
       <div className="btn-wrapper">
-        <button disabled={activeOption === null} onClick={handleNext}>Next</button>
+        <button disabled={activeOption === null} onClick={handleNext}>
+          Next
+        </button>
       </div>
       <button onClick={() => navigate("/result")}>Result</button>
     </div>
