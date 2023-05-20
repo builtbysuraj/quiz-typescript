@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type OptionData = {
   id: number;
   label: string;
@@ -28,11 +30,18 @@ export default function Question({
   handleNext,
 }: Props) {
   const { text, options } = question;
-
+  const [hasSelectedOption, setHasSelectedOption] = useState(false);
   // Option click function
   const handleOptionClick = (option: OptionData) => {
-    setActiveOption(option.id);
-    if (option.isCorrect) setScore((prev) => prev + 1);
+    if (!hasSelectedOption) {
+      setActiveOption(option.id);
+      setHasSelectedOption(true);
+      if (option.isCorrect) setScore((prev) => prev + 1);
+    }
+  };
+
+  const handleResetHasSelectedOption = () => {
+    setHasSelectedOption(false);
   };
 
   return (
@@ -56,7 +65,13 @@ export default function Question({
         })}
       </div>
       <div className="btn-wrapper">
-        <button disabled={activeOption === null} onClick={handleNext}>
+        <button
+          disabled={activeOption === null}
+          onClick={() => {
+            handleNext();
+            handleResetHasSelectedOption();
+          }}
+        >
           Next
         </button>
       </div>
