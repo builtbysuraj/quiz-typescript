@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 type OptionData = {
   id: number;
   label: string;
@@ -24,13 +22,11 @@ type Props = {
 
 export default function Question({
   question,
-  score,
   setScore,
   activeOption,
   setActiveOption,
   handleNext,
 }: Props) {
-  const navigate = useNavigate();
   const { text, options } = question;
 
   // Option click function
@@ -64,7 +60,6 @@ export default function Question({
           Next
         </button>
       </div>
-      <button onClick={() => navigate("/result")}>Result</button>
     </div>
   );
 }

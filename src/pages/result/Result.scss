@@ -2,6 +2,7 @@
   max-width: 700px;
   height: 90vh;
   margin: auto;
+  position: relative;
   .result-wrapper {
     margin-top: 10%;
     border-radius: 10px;
@@ -17,5 +18,15 @@
     .time {
       font-size: 1.9rem;
     }
+  }
+  img {
+    display: block;
+    width: 250px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 }
